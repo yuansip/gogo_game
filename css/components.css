@@ -1,0 +1,457 @@
+/* 组件特定样式 */
+
+/* 加载动画 */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 通知弹窗 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    max-width: 300px;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success {
+    border-left: 4px solid #27ae60;
+}
+
+.notification.error {
+    border-left: 4px solid #e74c3c;
+}
+
+.notification.info {
+    border-left: 4px solid #3498db;
+}
+
+.notification.warning {
+    border-left: 4px solid #f39c12;
+}
+
+/* 模态对话框 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal {
+    transform: scale(1);
+}
+
+.modal-header {
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.modal-content {
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.modal-btn.primary {
+    background: #3498db;
+    color: white;
+}
+
+.modal-btn.primary:hover {
+    background: #2980b9;
+}
+
+.modal-btn.secondary {
+    background: #95a5a6;
+    color: white;
+}
+
+.modal-btn.secondary:hover {
+    background: #7f8c8d;
+}
+
+/* 棋子放置动画 */
+.stone-placement {
+    animation: placeStone 0.3s ease;
+}
+
+@keyframes placeStone {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 被提取棋子的闪烁效果 */
+.captured-stone {
+    animation: captureFlash 0.6s ease;
+}
+
+@keyframes captureFlash {
+    0%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* 高亮可能的落子位置 */
+.highlight-dot {
+    fill: rgba(231, 76, 60, 0.6);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* 胜负提示 */
+.game-result {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1500;
+    min-width: 300px;
+}
+
+.game-result h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.game-result.black-wins h2 {
+    color: #2c3e50;
+}
+
+.game-result.white-wins h2 {
+    color: #34495e;
+}
+
+.game-result p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.result-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* 坐标标签 */
+.coordinate-label {
+    font-size: 12px;
+    fill: #8b4513;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+/* 最后落子标记 */
+.last-move-marker {
+    fill: none;
+    stroke: #e74c3c;
+    stroke-width: 3;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 死活题相关样式 */
+.problem-solved {
+    background: rgba(39, 174, 96, 0.1);
+    border: 2px solid #27ae60;
+}
+
+.problem-failed {
+    background: rgba(231, 76, 60, 0.1);
+    border: 2px solid #e74c3c;
+}
+
+.solution-highlight {
+    fill: rgba(46, 204, 113, 0.7);
+    stroke: #27ae60;
+    stroke-width: 2;
+    animation: solutionPulse 1s ease-in-out infinite;
+}
+
+@keyframes solutionPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* 难度星级显示 */
+.difficulty-stars {
+    color: #f39c12;
+    font-size: 18px;
+}
+
+/* 局势估算样式 */
+.territory-estimate {
+    display: block;
+    font-size: 0.9rem;
+    color: #27ae60;
+    font-weight: 600;
+    margin-top: 4px;
+    padding: 2px 6px;
+    background: rgba(39, 174, 96, 0.1);
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* 玩家信息面板样式增强 */
+.player-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.player-details .player-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #2c3e50;
+}
+
+.player-details .captures {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* 活跃玩家高亮 */
+.player.active .territory-estimate {
+    background: rgba(39, 174, 96, 0.2);
+    border: 1px solid rgba(39, 174, 96, 0.3);
+    animation: scoreGlow 2s ease-in-out infinite;
+}
+
+@keyframes scoreGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(39, 174, 96, 0.5);
+    }
+}
+
+/* 工具提示 */
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.tooltip.show {
+    opacity: 1;
+}
+
+/* 按钮禁用状态 */
+.control-btn:disabled,
+.mode-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.control-btn:disabled:hover,
+.mode-btn:disabled:hover {
+    background: transparent;
+    color: inherit;
+    border-color: inherit;
+}
+
+/* AI引擎选择器样式 */
+.ai-engine-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.ai-engine-indicator.local {
+    background-color: #27ae60;
+}
+
+.ai-engine-indicator.katago {
+    background-color: #3498db;
+}
+
+.ai-engine-indicator.online {
+    background-color: #f39c12;
+}
+
+.ai-engine-indicator.unavailable {
+    background-color: #e74c3c;
+}
+
+/* AI状态提示 */
+.ai-status-text {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.ai-status-text.connected {
+    color: #27ae60;
+}
+
+.ai-status-text.disconnected {
+    color: #e74c3c;
+}
+
+.ai-status-text.loading {
+    color: #f39c12;
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+    .notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        transform: translateY(-100px);
+    }
+    
+    .notification.show {
+        transform: translateY(0);
+    }
+    
+    .modal {
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .game-result {
+        margin: 20px;
+        padding: 25px;
+        min-width: auto;
+        width: calc(100% - 40px);
+    }
+    
+    .game-result h2 {
+        font-size: 1.5rem;
+    }
+    
+    .result-actions {
+        flex-direction: column;
+    }
+}
